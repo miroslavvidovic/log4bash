@@ -13,12 +13,14 @@
 #     http://github.com/fredpalmer/log4bash
 # -----------------------------------------------------------------------------
 # Description:
+#
 # Usage:
 #
 # -----------------------------------------------------------------------------
 # Script:
 
-set -e  # Fail on first error
+# Fail on first error
+set -e
 
 # Useful global variables that users may wish to reference
 SCRIPT_ARGS="$@"
@@ -89,25 +91,18 @@ log() {
 
 log_info()      { log "$@"; }
 
-log_speak()     {
-    if type -P say >/dev/null
+# Using espeak on Linux
+log_speak() {
+    if type -P espeak >/dev/null
     then
         local easier_to_say="$1";
-        case "${easier_to_say}" in
-            studionowdev*)
-                easier_to_say="studio now dev ${easier_to_say#studionowdev}";
-                ;;
-            studionow*)
-                easier_to_say="studio now ${easier_to_say#studionow}";
-                ;;
-        esac
-        say "${easier_to_say}";
+        espeak -ven+f3 -k5 -s150 "$1"
     fi
     return 0;
 }
 
 log_success()   { log "$1" "SUCCESS" "${LOG_SUCCESS_COLOR}"; }
-log_error()     { log "$1" "ERROR" "${LOG_ERROR_COLOR}"; log_speak "$1"; }
+log_error()     { log "$1" "ERROR" "${LOG_ERROR_COLOR}"; }
 log_warning()   { log "$1" "WARNING" "${LOG_WARN_COLOR}"; }
 log_debug()     { log "$1" "DEBUG" "${LOG_DEBUG_COLOR}"; }
 log_captains()  {
