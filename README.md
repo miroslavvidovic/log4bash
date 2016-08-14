@@ -2,7 +2,7 @@
 
 Let's face it - plain old **echo** just doesn't cut it.  **log4bash** is an attempt to have better logging for Bash scripts (i.e. make logging in Bash suck less).
 
-## Contributors
+## Original author
 
 Fred Palmer
 
@@ -83,7 +83,5 @@ Fred Palmer
 
     The script's base directory which is not always the current working directory.
 
-### More to Come
 
-    Please add any feature requests to a ticket for this project.
 

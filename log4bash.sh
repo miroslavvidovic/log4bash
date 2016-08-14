@@ -1,10 +1,23 @@
 #!/usr/bin/env bash
-#--------------------------------------------------------------------------------------------------
-# log4bash - Makes logging in Bash scripting suck less
-# Copyright (c) Fred Palmer
-# Licensed under the MIT license
-# http://github.com/fredpalmer/log4bash
-#--------------------------------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# Info:
+# 	Miroslav Vidovic
+# 	log4bash.sh
+# 	14.08.2016.-11:13:42
+# -----------------------------------------------------------------------------
+# Forked from:
+#     log4bash - Makes logging in Bash scripting suck less
+#     Copyright (c) Fred Palmer
+#     Licensed under the MIT license
+#     http://github.com/fredpalmer/log4bash
+# -----------------------------------------------------------------------------
+# Description:
+# Usage:
+#
+# -----------------------------------------------------------------------------
+# Script:
+
 set -e  # Fail on first error
 
 # Useful global variables that users may wish to reference
@@ -16,9 +29,9 @@ SCRIPT_BASE_DIR="$(cd "$( dirname "$0")" && pwd )"
 
 # This should probably be the right way - didn't have time to experiment though
 # declare -r INTERACTIVE_MODE="$([ tty --silent ] && echo on || echo off)"
-declare -r INTERACTIVE_MODE=$([ "$(uname)" == "Darwin" ] && echo "on" || echo "off")
+declare -r INTERACTIVE_MODE=$([ "$(uname)" == "Linux" ] && echo "on" || echo "off")
 
-#--------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 # Begin Help Section
 
 HELP_TEXT=""
@@ -31,9 +44,9 @@ usage() {
 }
 
 # End Help Section
-#--------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
-#--------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 # Begin Logging Section
 if [[ "${INTERACTIVE_MODE}" == "off" ]]
 then
@@ -104,7 +117,7 @@ log_captains()  {
     else
         log "$1";
     fi
-    
+
     log_speak "$1";
 
     return 0;
@@ -137,5 +150,5 @@ log_campfire() {
 }
 
 # End Logging Section
-#--------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 
