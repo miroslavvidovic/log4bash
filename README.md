@@ -25,7 +25,7 @@ Fred Palmer
     # If you have figlet installed -- you'll see some big letters on the screen!
     log_captains "What was in the captain's toilet?";
 
-    # If you have the "say" command (e.g. on a Mac)
+    # If you have the "espeak" command (e.g. on Linux)
     log_speak "Resistance is futile";
 
 ```
@@ -59,7 +59,7 @@ Fred Palmer
 
 * **log_speak**
 
-    On the Mac platform this will use the say command to echo the command to the current audio output device.
+    On the Linux platform this will use the espeak command to echo the command to the current audio output device.
 
 * **log_captains**
 

@@ -20,5 +20,5 @@ log_error "Whoops! I made a booboo";
 # If you have figlet installed -- you'll see some big letters on the screen!
 log_captains "What was in the captain's toilet?";
 
-# If you have the "say" command (e.g. on a Mac)
+# If you have the "espeak" command (e.g. on Linux)
 log_speak "Resistance is futile";
