@@ -117,33 +117,6 @@ log_captains()  {
 
     return 0;
 }
-
-log_campfire() {
-    # This function performs a campfire notification with the arguments passed to it
-    if [[ -z ${CAMPFIRE_API_AUTH_TOKEN} || -z ${CAMPFIRE_NOTIFICATION_URL} ]]
-    then
-        log_warning "CAMPFIRE_API_AUTH_TOKEN and CAMPFIRE_NOTIFICATION_URL must be set in order log to campfire."
-        return 1;
-    fi
-
-    local campfire_message="
-    {
-        \"message\": {
-            \"type\":\"TextMessage\",
-            \"body\":\"$@\"
-        }
-    }"
-
-    curl                                                            \
-        --write-out "\r\n"                                          \
-        --user ${CAMPFIRE_API_AUTH_TOKEN}:X                         \
-        --header 'Content-Type: application/json'                   \
-        --data "${campfire_message}"                                \
-        ${CAMPFIRE_NOTIFICATION_URL}
-
-    return $?;
-}
-
 # End Logging Section
 #-------------------------------------------------------------------------------
 
