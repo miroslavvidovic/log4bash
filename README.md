@@ -64,10 +64,6 @@ Fred Palmer
 * **log_captains**
 
     If the *figlet* program is installed this will print out an ascii-art depiction of the phrase passed to the function.
-    
-* **log_campfire**
-
-    Posts a message to your campfire configured by setting the variables for **CAMPFIRE_API_AUTH_TOKEN** and **CAMPFIRE_NOTIFICATION_URL**.
 
 ### Other Useful Tidbits
 
