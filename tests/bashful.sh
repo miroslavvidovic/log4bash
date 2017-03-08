@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-#--------------------------------------------------------------------------------------------------
+
 # log4bash - Makes logging in Bash scripting suck less
-# Copyright (c) Fred Palmer
-# Licensed under the MIT license
-# http://github.com/fredpalmer/log4bash
-#--------------------------------------------------------------------------------------------------
+
 source ../log4bash.sh
 
 log "This is regular log message... ";

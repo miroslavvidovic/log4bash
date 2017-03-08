@@ -2,19 +2,24 @@
 
 # -----------------------------------------------------------------------------
 # Info:
-# 	Miroslav Vidovic
-# 	log4bash.sh
-# 	14.08.2016.-11:13:42
+#   author:    Miroslav Vidovic
+#   file:      log4bash.sh
+#   created:   14.08.2016.-11:13:42
+#   revision:  08.03.2017.
+#   version:   1.1
 # -----------------------------------------------------------------------------
 # Forked from:
 #     log4bash - Makes logging in Bash scripting suck less
-#     Copyright (c) Fred Palmer
-#     Licensed under the MIT license
 #     http://github.com/fredpalmer/log4bash
-# -----------------------------------------------------------------------------
+# Requirements:
+#   espeak, figlet
 # Description:
-#
+#   Simple logger for bash scripts
 # Usage:
+#   Source the log4bash in your script and call the log functions
+#
+#   source "log4bash.sh"
+#   log_error "Something bad happened"
 #
 # -----------------------------------------------------------------------------
 # Script:
@@ -29,27 +34,13 @@ SCRIPT_NAME="${SCRIPT_NAME#\./}"
 SCRIPT_NAME="${SCRIPT_NAME##/*/}"
 SCRIPT_BASE_DIR="$(cd "$( dirname "$0")" && pwd )"
 
-# This should probably be the right way - didn't have time to experiment though
-# declare -r INTERACTIVE_MODE="$([ tty --silent ] && echo on || echo off)"
-declare -r INTERACTIVE_MODE=$([ "$(uname)" == "Linux" ] && echo "on" || echo "off")
+# Determines if we print colors or not
+if [ $(tty -s) ]; then
+    readonly INTERACTIVE_MODE="off"
+else
+    readonly INTERACTIVE_MODE="on"
+fi
 
-#------------------------------------------------------------------------------
-# Begin Help Section
-
-HELP_TEXT=""
-
-# This function is called in the event of an error.
-# Scripts which source this script may override by defining their own "usage" function
-usage() {
-    echo -e "${HELP_TEXT}";
-    exit 1;
-}
-
-# End Help Section
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# Begin Logging Section
 if [[ "${INTERACTIVE_MODE}" == "off" ]]
 then
     # Then we don't care about log colors
@@ -82,10 +73,10 @@ log() {
     local log_color="$3"
 
     # Default level to "info"
-    [[ -z ${log_level} ]] && log_level="INFO";
-    [[ -z ${log_color} ]] && log_color="${LOG_INFO_COLOR}";
+    [[ -z ${log_level} ]] && log_level="INFO"
+    [[ -z ${log_color} ]] && log_color="${LOG_INFO_COLOR}"
 
-    echo -e "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}";
+    echo -e "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}"
     return 0;
 }
 
@@ -95,7 +86,7 @@ log_info()      { log "$@"; }
 log_speak() {
     if type -P espeak >/dev/null
     then
-        local easier_to_say="$1";
+        local easier_to_say="$1"
         espeak -ven+f3 -k5 -s150 "$1"
     fi
     return 0;
@@ -117,6 +108,4 @@ log_captains()  {
 
     return 0;
 }
-# End Logging Section
-#-------------------------------------------------------------------------------
 
